@@ -1,0 +1,1 @@
+{"ast":null,"code":"import styled from 'styled-components';\nimport { Theme, Button } from '../../globalStyles';\nexport const DashboardWrapper = styled.div.withConfig({\n  displayName: \"Dashboardelements__DashboardWrapper\",\n  componentId: \"sc-8lky1l-0\"\n})([\"height:100vh;background-color:\", \";\"], Theme.darkPurple);","map":null,"metadata":{},"sourceType":"module"}
