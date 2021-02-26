@@ -20,4 +20,18 @@ export const BoardContainer = styled.div`
     background-color: ${Theme.purple};
 `
 
+export const Board = styled.div`
+    width: 800px;
+    height: 800px;
+    border-radius: 50px;
+    background-color:  ${Theme.darkPurple + 29};
+    box-shadow: 5px 5px 10px 0px  ${Theme.darkPurple + 99};
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+    grid-template-rows:  12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+`
 
+export const Square = styled.div`
+    background-color: ${({light}) => light ? Theme.purple : Theme.darkPurple};
+`

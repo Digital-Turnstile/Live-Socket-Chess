@@ -2,6 +2,16 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
+
+
+//Use bodyparser
+app.use(bodyParser.json());
+
+//Use cors
+var cors = require('cors');
+//allow all origins CHANGE FOR PROD
+app.use(cors());
 
 app.use(express.json());
 app.use(morgan('tiny'))
