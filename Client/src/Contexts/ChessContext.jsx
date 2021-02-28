@@ -4,7 +4,10 @@ import StartGameService from '../Services/StartGameService'
 
 //Socket.io styuff
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:5000');
+const socket = openSocket('http://192.168.0.109:5000');
+socket.on('connection', () => {
+    console.log('successfully connected to server')
+})
 
 //Init React context
 const ChessContext = React.createContext();
@@ -36,11 +39,7 @@ export const ChessProvider = props => {
         const newChessBoard = StartGameService.makeChessboard(newCheckerBoard);
         setBoard(newChessBoard)
 
-        console.log('hi')
 
-        socket.on('connection', () => {
-            console.log('successfully connected to server')
-        })
     }, [])
 
 
@@ -73,7 +72,6 @@ export const ChessProvider = props => {
         newSquare.color = color
 
         socket.emit('move', board)
-
     }
 
     const changeColor = () => {
