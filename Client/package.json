@@ -28,5 +28,8 @@
     "styled-components": "^5.2.1",
     "swr": "^0.4.0",
     "use-local-storage-state": "^6.0.3"
+  },
+  "devDependencies": {
+    "image-webpack-loader": "^7.0.1"
   }
 }
