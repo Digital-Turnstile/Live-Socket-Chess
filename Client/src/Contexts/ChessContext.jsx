@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import useLocalStorageState from 'use-local-storage-state'
 import StartGameService from '../Services/StartGameService'
 
+//Socket.io styuff
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:5000');
+
+//Init React context
 const ChessContext = React.createContext();
 
 export const ChessProvider = props => {
     const [board, setBoard] = useState([]);
     const [turn, setTurn] = useState(0);
     const [highlight, setHighlight] = useState(-1);
+    const [color, setColor] = useState('white');
 
     /* let square = {
             tile: (i + 1) % 2, // black or white tile
@@ -29,6 +35,12 @@ export const ChessProvider = props => {
         const newCheckerBoard = StartGameService.makeCheckerboard(arr);
         const newChessBoard = StartGameService.makeChessboard(newCheckerBoard);
         setBoard(newChessBoard)
+
+        console.log('hi')
+
+        socket.on('connection', () => {
+            console.log('successfully connected to server')
+        })
     }, [])
 
 
@@ -39,6 +51,9 @@ export const ChessProvider = props => {
             setHighlight(index);        
     }
 
+    socket.on('newMove', board => {
+        setBoard(board)
+    })
 
     //Moves the piece based upon its location, and the type of piece
     const move = (index, type, row, file) => {
@@ -56,14 +71,24 @@ export const ChessProvider = props => {
         const newSquare = newBoard[index]
         newSquare.piece = piece
         newSquare.color = color
+
+        socket.emit('move', board)
+
+    }
+
+    const changeColor = () => {
+        if(color == 'white')
+            setColor('black')
+        else
+            setColor('white')
     }
 
     return(
         <ChessContext.Provider value={{
             //data members
-            board, turn, highlight,
+            board, turn, highlight, color,
             //methods
-            select, move
+            select, move, changeColor
         }}>
             {props.children}
         </ChessContext.Provider>

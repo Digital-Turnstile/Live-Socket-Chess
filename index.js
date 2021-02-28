@@ -4,14 +4,25 @@ const httpServer = require('http').createServer(app);
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const io = require("socket.io")(httpServer, {
+const socketio = require('socket.io')
+
+const { getBoard, setBoard, move } = require('./Utils/chess')
+
+
+
+
+
+
+
+
+
+
+
+const io = socketio(httpServer, {
     cors: {
-      origin: "http://localhost:8080",
+      origin: "http://localhost:3000",
     },
   });
-
-
-
 
 
 //Use bodyparser
@@ -43,8 +54,22 @@ mongoose.connect('mongodb://localhost:27017/ChessOnline', { useNewUrlParser: tru
 });
 
 //Connect to websocket
-io.on('connection', () => { 
-    console.log('new User')
+io.on('connection', socket => {
+	console.log('new User')
+	io.emit('connection', 'welcome to chess') 
+
+	socket.on('disconnect', () => {
+		console.log('user left')
+	})
+
+	socket.on('move', board => {
+		setBoard(board)
+		io.emit('newMove', getBoard())
+	
+	})
+
+
+
 });
 
 

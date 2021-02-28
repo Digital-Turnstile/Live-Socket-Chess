@@ -11,7 +11,7 @@ import {
 } from './Chessboard.elements'
 
 export default function DashboardPage() {
-    const { board, turn, highlight, select, move } = useContext(ChessContext);
+    const { board, turn, highlight, select, move, color, changeColor } = useContext(ChessContext);
 
     //coordinate what happens when you click on a piece
     const handleClick = index => {
@@ -52,6 +52,7 @@ export default function DashboardPage() {
                     })
                 }
             </Board>
+            <button onClick={changeColor}>current color:  {color}</button>
             {/* <p>selected: {board[selected]?.rank + " " + board[selected]?.file}</p> */}
         </BoardContainer>
     </>

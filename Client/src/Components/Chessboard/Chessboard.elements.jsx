@@ -21,8 +21,8 @@ export const BoardContainer = styled.div`
 `
 
 export const Board = styled.div`
-    width: 700px;
-    height: 700px;
+    width: 400px;
+    height: 400px;
     border-radius: 50px;
     background-color:  ${Theme.darkPurple + 29};
     box-shadow: 5px 5px 10px 0px  ${Theme.darkPurple + 99};
