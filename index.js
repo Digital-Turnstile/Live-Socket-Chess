@@ -1,8 +1,17 @@
 const express = require('express');
 const app = express();
+const httpServer = require('http').createServer(app);
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const io = require("socket.io")(httpServer, {
+    cors: {
+      origin: "http://localhost:8080",
+    },
+  });
+
+
+
 
 
 //Use bodyparser
@@ -16,6 +25,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('tiny'))
 
+//Cors stuff
 app.use((req, res, next) => {
 	//TODO
 	//special domain relevant origin control 
@@ -26,20 +36,25 @@ app.use((req, res, next) => {
 	next();
 });
 
-if (process.env.NODE_ENV !== 'production') {
-	require('dotenv').config();
-}
 
-
+//Connect to Mongodb
 mongoose.connect('mongodb://localhost:27017/ChessOnline', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () => {
 	console.log('Connected to DB');
 });
 
-//Init API
-const apiRouter = require('./Routes/api.js');
-app.use('/api', apiRouter);
-
-
-app.listen(process.env.PORT || 5000, () => {
-	console.log('server initialized');
+//Connect to websocket
+io.on('connection', () => { 
+    console.log('new User')
 });
+
+
+//Init API
+//const apiRouter = require('./Routes/api.js');
+//app.use('/api', apiRouter);
+
+
+
+httpServer.listen(5000);
+
+
+

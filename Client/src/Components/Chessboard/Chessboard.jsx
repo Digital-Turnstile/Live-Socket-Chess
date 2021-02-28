@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import ChessContext from '../../Contexts/ChessContext'
 
-//dynamically import all chess pieces
 
 import {
     BoardWrapper,
@@ -33,6 +32,7 @@ export default function DashboardPage() {
     function ChessPiece(piece, highlight, i){
         let color = piece.piece.color.substring(0, 1);
         let name = piece.piece.piece.substring(0, 1)
+        //dynamically import all chess pieces
         return <Piece light={piece.color == 'light'} highlight={i == highlight} src={`./images/ChessPieces/45px-Chess_${name}${color}t45.svg.png`} />
     }
 

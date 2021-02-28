@@ -21,8 +21,8 @@ export const BoardContainer = styled.div`
 `
 
 export const Board = styled.div`
-    width: 600px;
-    height: 600px;
+    width: 700px;
+    height: 700px;
     border-radius: 50px;
     background-color:  ${Theme.darkPurple + 29};
     box-shadow: 5px 5px 10px 0px  ${Theme.darkPurple + 99};
@@ -34,7 +34,7 @@ export const Board = styled.div`
 
 export const Square = styled.div`
     background-color: ${({ light }) => light ? Theme.purple : Theme.darkPurple};
-    padding: 12px;
+    padding: 6px;
     border-style: solid;
     border-width: 2px;
     border-color: ${({ highlight }) => highlight ? `white` :  `transparent`};  
