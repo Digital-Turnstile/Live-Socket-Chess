@@ -57,7 +57,6 @@ mongoose.connect('mongodb://localhost:27017/ChessOnline', { useNewUrlParser: tru
 io.on('connection', socket => {
 	console.log('new User')
 	io.emit('connection', 'welcome to chess') 
-
 	socket.on('disconnect', () => {
 		console.log('user left')
 	})
@@ -65,11 +64,7 @@ io.on('connection', socket => {
 	socket.on('move', board => {
 		setBoard(board)
 		io.emit('newMove', getBoard())
-	
 	})
-
-
-
 });
 
 
